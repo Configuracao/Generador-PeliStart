@@ -138,20 +138,23 @@ function generar() {
 
                     let justHtml = `
 <!-- ${datos.title} -->
-<div class="swiper-slide">
-    <div class="bs-card">
-        <div class="card-cover" style="background: url('https://image.tmdb.org/t/p/w780/${datos.backdrop_path}') no-repeat center 20% / cover;" />
-        <div class="card-content">
-            <h1 class="card-title">${datos.title}</h1>
-            <p class="card-tags">${convertMinutes(datos.runtime)} &#x2022; ${datos.release_date.slice(0,4)}</p>
-            <p class="card-resume">
+<div class='swiper-slide'>
+<a class='btn btn-blur' href='#'>
+    <div class='bs-card'>
+        <div class='card-cover' style='background: url(&apos;https://image.tmdb.org/t/p/w780/${datos.backdrop_path}&apos;) no-repeat center 20% / cover;'/>
+        <div class='card-content'>
+            <h1 class='card-title'>${datos.title}</h1>
+            <p class='card-tags'>${convertMinutes(datos.runtime)} &#x2022; ${datos.release_date.slice(0,4)}</p>
+            <p class='card-resume'>
             ${datos.overview}
             </p>
             <div>
-                <a class="btn btn-blur" href="#"><i class="fa-solid fa-play" /> Ver ahora</a>
+                
             </div>
+            
         </div>
     </div>
+    </a>
 </div>
 
 `;                  
