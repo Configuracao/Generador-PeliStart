@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" referrerpolicy="no-referrer" rel="stylesheet">
+    <!-- <link rel="stylesheet"
+        href="https://dl.dropbox.com/scl/fi/scezgkh458fvx80bnvvti/generator.css?rlkey=p906cpqjbbqg6yeayy36hf153"> -->
+    <!-- <link rel="stylesheet" href="fire-go.css"> -->
+    <link rel="stylesheet" href="generador.css">
+    <link rel="shortcut icon" href="https://i.ibb.co/d477r9m/logo.png" type="image/x-icon">
+    <link rel="icon" href="https://i.ibb.co/d477r9m/logo.png" type="image/x-icon">
+    <title>Darkplus Generador</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script><style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"><style></style>
+</head>
+
+<body>
+
+    <div class="generator">
+
+        <ul class="get-data">
+
+            <li>
+                <h1 class="main-title"><img src="" alt="" style="display: none;"> FIREGO GENERATOR</h1>
+            </li>
+            <li class="info-box">
+                <h2>TIPO</h2>
+                <form class="tipo">
+                    <input type="radio" name="type" id="serie" value="serie" checked="">
+                    <label for="serie">SERIE</label>
+                    <input type="radio" name="type" id="movie" value="movie">
+                    <label for="movie">PELICULA</label>
+                </form>
+            </li>
+            <div class="search-results">
+
+                <input type="text" id="movie-search" placeholder="Buscar">
+            </div>
+            <div id="toggle-results" onclick="toggleResults()">Mostrar Resultados</div>
+            <div id="search-results-container" style="display: none;">
+                <div id="search-results"></div>
+                <p id="no-results-message">Sin resultados, escribe algo en el buscador</p>
+            </div>
+            <input type="text" id="titulo-entrada" placeholder="Título de la entrada" readonly="">
+
+            <ul class="bs-data-values">
+
+                <li class="info-box">
+                    <h2>ID TMDB <a href="https://www.themoviedb.org/" target="_blank" class="tmdb"><i class="fa-solid fa-link"></i></a></h2>
+                    <input type="number" placeholder="ID" id="numero" value="60059">
+                </li>
+
+                <li class="info-box" id="season-selector" style="display: none;">
+                    <h2>TEMPORADA</h2>
+                    <input type="number" placeholder="# de Temporada" id="numeroTemporada" value="1" min="1">
+                </li>
+            </ul>
+            <div class="episodeContainer" id="episodeContainer" style="display: none;">
+                <div class="inputs-container" id="inputs-container"></div>
+            </div>
+            <div id="movie-link" style="display: block;">
+                <h2> Agregar enlaces</h2>
+                <input type="text" id="userInputA" placeholder="código de streamwish.to">
+                <h2 style="display: none;">OPCIÓN 2</h2>
+                <input type="text" id="userInputB" placeholder="Url de vidhidepro.com" style="display: none;">
+                <h2 style="display: none;">OPCIÓN 3</h2>
+                <input type="text" id="userInputC" placeholder="Url de la película" style="display: none;">
+            </div>
+
+            <input type="submit" value="GENERAR" onclick="generar()">
+
+            <li class="data-preview">
+                <img id="info-poster" src="">
+                <ul class="general-info">
+                    <h2 id="info-title"></h2>
+                    <p id="info-seasons"></p>
+                    <p id="info-year"></p>
+                    <p id="info-ID"></p>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="final-js">
+
+            <div class="html-area">
+                <div class="html-final" id="html-final">
+
+                </div>
+            </div>
+
+            <button id="copiar">Copiar HTML <i class="fa-solid fa-copy"></i></button>
+        </div>
+
+    </div>
+    <!-- Agrega esto al final del cuerpo de tu HTML -->
+    <div id="scroll-to-top" onclick="scrollToTopOrBottom()">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- <script
+        src="https://dl.dropbox.com/scl/fi/2fmqlhfnbvvrulkxbvby3/generator1.js?rlkey=n68o8mu7slejpmmq1mehad513"></script> -->
+    <script src="generador.js"></script>
+
+
+
+</body></html>
