@@ -702,9 +702,9 @@ async function generar() {
     <a href="https://pruevon.blogspot.com/2024/08/wish2.html?url=${userInputA}&img=https://image.tmdb.org/t/p/w500${datos.backdrop_path}" class="hacker">
       <i class="fa-solid fa-play fa-beat"></i><b>Reproducir</b>
     </a>
-    <a href="wvc-x-callback://open?url=https://pruevon.blogspot.com/2024/08/wish2.html?url=${userInputA}&img=https://image.tmdb.org/t/p/w500${datos.backdrop_path}" class="hacker">
-      <i class="fa-brands fa-chromecast fa-beat"></i><b>Transmitir</b>
-    </a>
+    <a href="wvc-x-callback://open?url=http://pelistart.free.nf/embed/descarga.php?url=${userInputA}" class="hacker">
+    <i class="fa-brands fa-chromecast fa-beat"></i><b>Transmitir</b>
+</a>
     <p class="resume">${datos.overview}</p>
   </div>
 
