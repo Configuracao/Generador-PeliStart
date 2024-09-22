@@ -624,7 +624,7 @@ background-color: #9e0505ff;
         </ul>
         <p class="resume">${datos.overview}</p>
         <div class="more-data">
-            <p>Genre: ${tags}</p>
+            <p>Genero: ${tags}</p>
         </div>
     </div>
 </div>
