@@ -631,10 +631,10 @@ background-color: #9e0505ff;
 
 <!--more-->
 
-<a href="https://pruevon.blogspot.com/2024/08/wish2.html?url=https://streamwish.to/e/qk9j7hh6ire5&img=https://image.tmdb.org/t/p/w500/8fW0wqB3a6dvIoIBduCKocZi58a.jpg" class="hacker">
+<a href="https://pruevon.blogspot.com/2024/08/wish2.html?url=${userInputA}&img=https://image.tmdb.org/t/p/w500${datos.backdrop_path}" class="hacker">
 <i class="fa-solid fa-play fa-beat"></i><b>Reproducir</b>
 </a>
-<a href="wvc-x-callback://open?url=https://pruevon.blogspot.com/2024/08/wish2.html?url=https://streamwish.to/e/qk9j7hh6ire5&img=https://image.tmdb.org/t/p/w500/8fW0wqB3a6dvIoIBduCKocZi58a.jpg" class="hacker">
+<a href="wvc-x-callback://open?url=${userInputA}" class="hacker">
 <i class="fa-brands fa-chromecast fa-beat"></i><b>Transmitir</b>
 </a>
 
