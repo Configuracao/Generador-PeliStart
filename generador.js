@@ -351,7 +351,7 @@ async function generar() {
                         const runtime = episode.runtime ? `${episode.runtime}m` : 'N/A';
                         const episodeHTML = `
                             <li>
-                                <a href="#!" class="episode episode-link" data-url="${episodeUrl}">
+                                <a href="#!" class="episode episode-link" data-url="https://pruevon.blogspot.com/2024/08/wish2.html?url=${episodeUrl}&img=${imageUrl}">
                                     <div class="episode__img">
                                         <img src="${imageUrl}" onerror="this.style='display:none';">
                                         <div class="episode__no-image"><i class="fa-regular fa-circle-play"></i></div>
