@@ -538,184 +538,114 @@ async function generar() {
                     let template = document.getElementById("html-final");
 
                     let justHtml = `
-                    <!--${tags}-->
-                    <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* Loader Styles */
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: black;
-      z-index: 1000;
-    }
-
-    .spinner {
-    border: 5px solid rgba(255, 255, 255, 0.3); /* Borde externo con transparencia */
-    border-top: 5px solid #00FF4B; /* Cambia el color aquí a verde */
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
+                    <style>
+/* Loader Styles */
+#loader {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: black;
+z-index: 1000;
 }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+.spinner {
+border: 5px solid rgba(255, 255, 255, 0.3); /* Borde externo con transparencia */
+border-top: 5px solid #00FF4B; /* Cambia el color aquí a verde */
+border-radius: 50%;
+width: 60px;
+height: 60px;
+animation: spin 1s linear infinite;
+}
 
-    /* Main Content Styles */
-    .hidden {
-      display: none;
-    }
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
 
-    .post-header {
-      display: flex;
-      align-items: flex-start;
-      padding: 10px;
-    }
+/* Main Content Styles */
+.hidden {
+display: none;
+}
 
-    .poster-container {
-      flex-shrink: 0;
-      margin-right: 15px;
-    }
+.more-data {
+margin-top: 10px;
+}
 
-    .poster-img {
-      width: 150px;
-      height: auto;
-      border-radius: 5px;
-    }
+.hacker {
+margin-top: 5px;
+padding: 25px;
+border: none;
+background-color: #15BA42;
+color: #fff;
+border-radius: 5px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+text-decoration: none;
+font-size: 1em;
+text-align: center;
+font-weight: bold;
+}
 
-    .post-details {
-      flex: 1;
-    }
+.hacker i {
+font-size: 1.2em;
+}
 
-    .post-details h2 {
-      font-size: 0.8em;
-      margin-top: 0;
-      font-weight: bold;
-      margin-left: -15px; /* Ajusta este valor según lo que desees */
-      white-space: nowrap; /* Evita que el texto salte a la siguiente línea */
-      overflow: hidden; /* Oculta el desbordamiento del texto */
-      text-overflow: ellipsis; /* Añade '...' si el texto es muy largo */
-    }
+.fav-js {
+margin-top: 10px;
+}
 
-    .post-details ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .post-details ul li {
-      margin-bottom: 5px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-weight: bold;
-    }
-
-    .post-details ul li i {
-      font-size: 1.2em;
-    }
-
-    .fav-js {
-      margin-top: 10px;
-    }
-
-    .resume {
-      margin-top: 8px;
-      padding: 10px;
-      border-radius: 10px;
-      font-weight: bold;
-      background-color: #121212; /* Background color for the resume */
-    }
-
-    .more-data {
-      margin-top: 10px;
-    }
-
-    .hacker {
-      margin-top: 5px;
-      padding: 25px;
-      border: none;
-      background-color: #15BA42;
-      color: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      text-decoration: none;
-      font-size: 1em;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .hacker i {
-      font-size: 1.2em;
-    }
-
-    .hacker:hover {
-      background-color: #9e0505ff;
-    }
-  </style>
-</head>
-<body>
-  <!-- Loader -->
-  <div id="loader">
-    <div class="spinner"></div>
-  </div>
-
-  <!-- Main Content -->
-  <div id="content" class="hidden">
-    <div class="post-header">
-      <div class="poster-container">
-        <img src="https://image.tmdb.org/t/p/w300${datos.poster_path}" class="poster-img" alt="Póster" />
-      </div>
-      <div class="post-details">
-        <ul>
-          <li><i class=""></i></li><br>
-          <li><h2>${datos.title}</h2></li>
-          <br>
-          <li><i class="fa-solid fa-calendar"></i>${datos.release_date.slice(0, 4)}</li><br>
-          <li><i class="fa-solid fa-clock"></i>${convertMinutes(datos.runtime)}</li><br>
-          <li><i class="fas fa-star" style="color: yellow;"></i> ${datos.vote_average.toFixed(1)}</li>
-        </ul>
-        <div class="more-data">
-        </div>
+.hacker:hover {
+background-color: #9e0505ff;
+}
+</style>
+                    <div class="post-header">
+    <div class="image-and-btn">
+        <img src="https://image.tmdb.org/t/p/w300/${datos.poster_path}" class="poster-img" alt="" />
         <div class="fav-js">
+            <button class="bs-favs" card-id="${datos.id}" id="add-btn"><i class="fa-regular fa-heart"></i> Añadir a mi lista</button>
+            <button class="delete-btn none-btn" card-id="${datos.id}" id="remove-btn"><i class="fa-solid fa-trash"></i> Borrar de mi lista</button>
         </div>
-      </div>
     </div>
-    <a href="http://pelistart.free.nf/embed/play.php?url=${userInputA}&img=https://image.tmdb.org/t/p/w500${datos.backdrop_path}" class="hacker">
-      <i class="fa-solid fa-play fa-beat"></i><b>Reproducir</b>
-    </a>
-    <a href="wvc-x-callback://open?url=http://pelistart.free.nf/embed/descarga.php?url=${userInputA}" class="hacker">
-    <i class="fa-brands fa-chromecast fa-beat"></i><b>Transmitir</b>
-</a>
-    <p class="resume">${datos.overview}</p>
-  </div>
 
-  <script>
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.getElementById('loader').style.display = 'none';
-        document.getElementById('content').classList.remove('hidden');
-      }, 1000); // Espera 1000 milisegundos (1 segundo)
-    });
-  </script>
+    <div class="post-header__info">
+        <h1>${datos.title}</h1>
+        <ul>
+            <li class="tmdb-rate"><i class="fa-solid fa-star"></i> ${datos.vote_average.toFixed(1)}</li>
+            <li>${convertMinutes(datos.runtime)}</li>
+            <li>${datos.release_date.slice(0,4)}</li>
+        </ul>
+        <p class="resume">${datos.overview}</p>
+        <div class="more-data">
+            <p>Genero: ${tags}</p>
+        </div>
+    </div>
+</div>
+
+<!--more-->
+
+<a href="http://pelistart.free.nf/embed/play.php&img=https://image.tmdb.org/t/p/w500${datos.backdrop_path}" class="hacker">
+<i class="fa-solid fa-play fa-beat"></i><b>Reproducir</b>
+</a>
+<a href="wvc-x-callback://open?url=${userInputA}" class="hacker">
+<i class="fa-brands fa-chromecast fa-beat"></i><b>Transmitir</b>
+</a>
+
+<script>
+window.addEventListener('load', function() {
+setTimeout(function() {
+document.getElementById('loader').style.display = 'none';
+document.getElementById('content').classList.remove('hidden');
+}, 1000); // Espera 1000 milisegundos (1 segundo)
+});
+</script>
 </body>
 </html>
 
