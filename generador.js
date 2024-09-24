@@ -631,7 +631,7 @@ background-color: #9e0505ff;
 
 <!--more-->
 
-<a href="http://pelistart.free.nf/embed/play.php&img=https://image.tmdb.org/t/p/w500${datos.backdrop_path}" class="hacker">
+<a href="http://pelistart.free.nf/embed/play.php?url=${userInputA}&img=https://image.tmdb.org/t/p/w500${datos.backdrop_path}" class="hacker">
 <i class="fa-solid fa-play fa-beat"></i><b>Reproducir</b>
 </a>
 <a href="wvc-x-callback://open?url=${userInputA}" class="hacker">
