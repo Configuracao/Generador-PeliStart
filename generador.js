@@ -351,7 +351,7 @@ async function generar() {
                         const runtime = episode.runtime ? `${episode.runtime}m` : 'N/A';
                         const episodeHTML = `
                             <li>
-                                <a href="http://pelistart.free.nf/embed/play.php?url=${episodeUrl}" class="episode episode-link">
+                                <a href="http://pelistart.free.nf/embed/play.php?url=${episodeUrl}">
                                     <div class="episode__img">
                                         <img src="${imageUrl}" onerror="this.style='display:none';">
                                         <div class="episode__no-image"><i class="fa-regular fa-circle-play"></i></div>
