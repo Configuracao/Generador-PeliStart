@@ -351,7 +351,7 @@ async function generar() {
                         const runtime = episode.runtime ? `${episode.runtime}m` : 'N/A';
                         const episodeHTML = `
                             <li>
-                                <a href="http://pelistart.free.nf/embed/play.php?url=${episodeUrl}" class="episode">
+                                <a href="https://pelistart503.blogspot.com/p/redireccionador.html?url=${episodeUrl}" class="episode">
                                     <div class="episode__img">
                                         <img src="${imageUrl}" onerror="this.style='display:none';">
                                         <div class="episode__no-image"><i class="fa-regular fa-circle-play"></i></div>
@@ -631,7 +631,7 @@ background-color: #9e0505ff;
 
 <!--more-->
 
-<a href="http://pelistart.free.nf/embed/play.php?url=${userInputA}&img=https://image.tmdb.org/t/p/w500${datos.backdrop_path}" class="hacker">
+<a href="https://pelistart503.blogspot.com/p/redireccionador.html?url=${userInputA}&img=https://image.tmdb.org/t/p/w500${datos.backdrop_path}" class="hacker">
 <i class="fa-solid fa-play fa-beat"></i><b>Reproducir</b>
 </a>
 <a href="wvc-x-callback://open?url=${userInputA}" class="hacker">
