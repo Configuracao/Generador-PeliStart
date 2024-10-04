@@ -350,23 +350,24 @@ async function generar() {
                         const imageUrl = `https://image.tmdb.org/t/p/w300/${episode.still_path}`;
                         const runtime = episode.runtime ? `${episode.runtime}m` : 'N/A';
                         const episodeHTML = `
-                            <li>
-                                <a href="https://pelistart503.blogspot.com/p/redireccionador.html?url=${episodeUrl}" class="episode">
-                                    <div class="episode__img">
-                                        <img src="${imageUrl}" onerror="this.style='display:none';">
-                                        <div class="episode__no-image"><i class="fa-regular fa-circle-play"></i></div>
-                                    </div>
-                                    <div class="episode__info">
-                                        <h4 class="episode__info__title">${episode.episode_number}. ${episode.name}</h4>
-                                        <div class="episode__info__duration">${runtime}</div>
-                                        <p class="sinopsis-info">${synopsis}</p>
-                                        <label class="toggle-switch">
-                            <input type="checkbox" onchange="toggleSeenStatus('episode-1', this)">
-                            <span class="slider"></span>
-                        </label>
-                                    </div>
-                                </a>
-                            </li>`;
+                            <li data-episode-id="${episode.episode_number}">
+    <a href="https://pelistart503.blogspot.com/p/redireccionador.html?url=${episodeUrl}" class="episode">
+        <div class="episode__img">
+            <img src="${imageUrl}" onerror="this.style='display:none';">
+            <div class="episode__no-image"><i class="fa-regular fa-circle-play"></i></div>
+        </div>
+        <div class="episode__info">
+            <h4 class="episode__info__title">${episode.episode_number}. ${episode.name}</h4>
+            <div class="episode__info__duration">${runtime}</div>
+            <p class="sinopsis-info">${synopsis}</p>
+            <label class="toggle-switch">
+                <input type="checkbox" onchange="toggleSeenStatus('${episode.episode_number}', this)" id="toggle-${episode.episode_number}">
+                <span class="slider"></span>
+                <span class="status-text">No visto</span>
+            </label>
+        </div>
+    </a>
+</li>`;
                         episodes.push(episodeHTML);
                     }
 
@@ -401,134 +402,135 @@ async function generar() {
                 // Construir el HTML final
                 let htmlFinal = `
                 <div class="post-header">
-                <div class="filter">
-                <div class="background-image" style="background-image: url(https://image.tmdb.org/t/p/w500${serieData.backdrop_path});"></div>
-                        </div>
-                <div class="image-and-btn">
-                <img src="https://image.tmdb.org/t/p/w300/${serieData.poster_path}" class="poster-img" alt="" />
-                <div class="fav-js">
-                <button class="bs-favs" card-id="${serieData.id}" id="add-btn"><i class="fa-regular fa-heart"></i> Añadir a mi lista</button>
-                <button class="delete-btn none-btn" card-id="${serieData.id}" id="remove-btn"><i class="fa-solid fa-trash"></i> Borrar de mi lista</button>
-                </div>
-                </div>
-                
-                <div class="post-header__info">
-                <h1>${serieData.name}</h1>
-                <ul>
-                <li class="tmdb-rate"><i class="fa-solid fa-star"></i> ${serieData.vote_average.toFixed(1)}</li>
-                <li>${serieData.number_of_seasons + genSeasonsCount}</li>
-                <li>${serieData.first_air_date.slice(0, 4)}</li>
-                </ul>
-                <p class="resume">${serieData.overview}</p>
-                <div class="more-data">
-                <p>Género: ${tags}</p>
-                <p>Created by: ${creators}</p>
-                </div>
-                </div>
-                </div>
-                <!-- Ventana Modal Video -->
-                <div id="myModal" class="modal-videos">
-                <div class="modal-content-videos" id="transmitirEpisode">
-                <span id="closeModal" onclick="closeModal">&times;</span>
-                <div id="modalContent" class="iframe-container"></div>
-                </div>
-                </div>
-                <!--more-->
-                <div class="season-list">
-                <div class="select-season">
-                <h2>Episodios</h2>
-                <select name="" id="select-season">
-                ${seasonsOption}
-                </select>
-                </div>
-                <div id="temps">
-                ${episodesHTML}
-                </div>
-                </div>
-                <!-- JavaScript para manejar el estado de los episodios -->
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    loadEpisodeStatus();
-});
+    <div class="filter">
+        <div class="background-image" style="background-image: url(https://image.tmdb.org/t/p/w500${serieData.backdrop_path});"></div>
+    </div>
+    <div class="image-and-btn">
+        <img src="https://image.tmdb.org/t/p/w300/${serieData.poster_path}" class="poster-img" alt="" />
+        <div class="fav-js">
+            <button class="bs-favs" card-id="${serieData.id}" id="add-btn"><i class="fa-regular fa-heart"></i> Añadir a mi lista</button>
+            <button class="delete-btn none-btn" card-id="${serieData.id}" id="remove-btn"><i class="fa-solid fa-trash"></i> Borrar de mi lista</button>
+        </div>
+    </div>
+    
+    <div class="post-header__info">
+        <h1>${serieData.name}</h1>
+        <ul>
+            <li class="tmdb-rate"><i class="fa-solid fa-star"></i> ${serieData.vote_average.toFixed(1)}</li>
+            <li>${serieData.number_of_seasons + genSeasonsCount}</li>
+            <li>${serieData.first_air_date.slice(0, 4)}</li>
+        </ul>
+        <p class="resume">${serieData.overview}</p>
+        <div class="more-data">
+            <p>Género: ${tags}</p>
+            <p>Created by: ${creators}</p>
+        </div>
+    </div>
+</div>
 
+<!-- Ventana Modal Video -->
+<div id="myModal" class="modal-videos">
+    <div class="modal-content-videos" id="transmitirEpisode">
+        <span id="closeModal" onclick="closeModal">&times;</span>
+        <div id="modalContent" class="iframe-container"></div>
+    </div>
+</div>
+
+<!--more-->
+<div class="season-list">
+    <div class="select-season">
+        <h2>Episodios</h2>
+        <select name="" id="select-season">
+            ${seasonsOption}
+        </select>
+    </div>
+    <div id="temps">
+        ${episodesHTML}
+    </div>
+</div>
+
+<!-- Episodios Modificados -->
+<ul>
+    ${episodesHTML}
+</ul>
+
+<script>
 function toggleSeenStatus(episodeId, checkbox) {
     const episodeElement = document.querySelector(`[data-episode-id="${episodeId}"]`);
-    
+    const statusText = episodeElement.querySelector(".status-text");
+
     if (checkbox.checked) {
-        localStorage.setItem(episodeId, "seen");
+        localStorage.setItem(`episode-${episodeId}`, "seen");
         episodeElement.classList.add("seen");
+        statusText.textContent = "Visto"; // Cambia el texto a "Visto"
     } else {
-        localStorage.removeItem(episodeId);
+        localStorage.removeItem(`episode-${episodeId}`);
         episodeElement.classList.remove("seen");
+        statusText.textContent = "No visto"; // Cambia el texto a "No visto"
     }
 }
 
-function loadEpisodeStatus() {
-    document.querySelectorAll(".episode").forEach(function(episode) {
-        const episodeId = episode.getAttribute("data-episode-id");
-        const isSeen = localStorage.getItem(episodeId) === "seen";
-        const checkbox = episode.querySelector(".toggle-switch input");
-
-        checkbox.checked = isSeen;
-        if (isSeen) {
+// Inicializa el estado de los episodios al cargar la página
+function initializeEpisodeStatus() {
+    const episodes = document.querySelectorAll('li[data-episode-id]');
+    episodes.forEach(episode => {
+        const episodeId = episode.getAttribute('data-episode-id');
+        const checkbox = document.getElementById(`toggle-${episodeId}`);
+        if (localStorage.getItem(`episode-${episodeId}`) === "seen") {
+            checkbox.checked = true;
             episode.classList.add("seen");
-        } else {
-            episode.classList.remove("seen");
+            episode.querySelector(".status-text").textContent = "Visto"; // Actualiza el texto
         }
     });
 }
+
+// Llama a la función al cargar la página
+window.onload = initializeEpisodeStatus;
 </script>
 
 <style>
-/* Estilos para el toggle */
 .toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    display: none; /* Oculta el checkbox */
 }
 
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+.toggle-switch .slider {
+    width: 34px;
+    height: 20px;
     background-color: #ccc;
-    transition: .4s;
     border-radius: 34px;
+    position: relative;
+    transition: background-color 0.2s;
+    margin-right: 10px; /* Espacio entre el toggle y el texto */
 }
 
-.slider:before {
-    position: absolute;
+.toggle-switch .slider:before {
     content: "";
-    height: 14px;
-    width: 14px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .4s;
+    position: absolute;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s;
 }
 
-input:checked + .slider {
-    background-color: #4CAF50;
+.toggle-switch input:checked + .slider {
+    background-color: #2196F3; /* Color cuando está activado */
 }
 
-input:checked + .slider:before {
-    transform: translateX(18px);
+.toggle-switch input:checked + .slider:before {
+    transform: translateX(14px); /* Mueve el círculo cuando está activado */
 }
 
-/* Estilos para episodios vistos */
-.seen {
-    opacity: 0.6;
+.status-text {
+    font-size: 14px; /* Tamaño de la fuente */
+    color: #333; /* Color del texto */
 }
 </style>`;
 
