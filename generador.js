@@ -360,6 +360,10 @@ async function generar() {
                                         <h4 class="episode__info__title">${episode.episode_number}. ${episode.name}</h4>
                                         <div class="episode__info__duration">${runtime}</div>
                                         <p class="sinopsis-info">${synopsis}</p>
+                                        <label class="toggle-switch">
+                            <input type="checkbox" onchange="toggleSeenStatus('episode-1', this)">
+                            <span class="slider"></span>
+                        </label>
                                     </div>
                                 </a>
                             </li>`;
@@ -440,7 +444,93 @@ async function generar() {
                 <div id="temps">
                 ${episodesHTML}
                 </div>
-                </div>`;
+                </div>
+                <!-- JavaScript para manejar el estado de los episodios -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    loadEpisodeStatus();
+});
+
+function toggleSeenStatus(episodeId, checkbox) {
+    const episodeElement = document.querySelector(`[data-episode-id="${episodeId}"]`);
+    
+    if (checkbox.checked) {
+        localStorage.setItem(episodeId, "seen");
+        episodeElement.classList.add("seen");
+    } else {
+        localStorage.removeItem(episodeId);
+        episodeElement.classList.remove("seen");
+    }
+}
+
+function loadEpisodeStatus() {
+    document.querySelectorAll(".episode").forEach(function(episode) {
+        const episodeId = episode.getAttribute("data-episode-id");
+        const isSeen = localStorage.getItem(episodeId) === "seen";
+        const checkbox = episode.querySelector(".toggle-switch input");
+
+        checkbox.checked = isSeen;
+        if (isSeen) {
+            episode.classList.add("seen");
+        } else {
+            episode.classList.remove("seen");
+        }
+    });
+}
+</script>
+
+<style>
+/* Estilos para el toggle */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+/* Estilos para episodios vistos */
+.seen {
+    opacity: 0.6;
+}
+</style>`;
 
                 // Agregar el HTML final al elemento con el ID "html-final"
                 document.getElementById('html-final').innerText = htmlFinal;
