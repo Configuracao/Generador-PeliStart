@@ -350,24 +350,19 @@ async function generar() {
                         const imageUrl = `https://image.tmdb.org/t/p/w300/${episode.still_path}`;
                         const runtime = episode.runtime ? `${episode.runtime}m` : 'N/A';
                         const episodeHTML = `
-                            <li data-episode-id="${episode.episode_number}">
-    <a href="https://pelistart503.blogspot.com/p/redireccionador.html?url=${episodeUrl}" class="episode">
-        <div class="episode__img">
-            <img src="${imageUrl}" onerror="this.style='display:none';">
-            <div class="episode__no-image"><i class="fa-regular fa-circle-play"></i></div>
-        </div>
-        <div class="episode__info">
-            <h4 class="episode__info__title">${episode.episode_number}. ${episode.name}</h4>
-            <div class="episode__info__duration">${runtime}</div>
-            <p class="sinopsis-info">${synopsis}</p>
-            <label class="toggle-switch">
-                <input type="checkbox" onchange="toggleSeenStatus('${episode.episode_number}', this)" id="toggle-${episode.episode_number}">
-                <span class="slider"></span>
-                <span class="status-text">No visto</span>
-            </label>
-        </div>
-    </a>
-</li>`;
+                            <li>
+                                <a href="https://pelistart503.blogspot.com/p/redireccionador.html?url=${episodeUrl}" class="episode">
+                                    <div class="episode__img">
+                                        <img src="${imageUrl}" onerror="this.style='display:none';">
+                                        <div class="episode__no-image"><i class="fa-regular fa-circle-play"></i></div>
+                                    </div>
+                                    <div class="episode__info">
+                                        <h4 class="episode__info__title">${episode.episode_number}. ${episode.name}</h4>
+                                        <div class="episode__info__duration">${runtime}</div>
+                                        <p class="sinopsis-info">${synopsis}</p>
+                                    </div>
+                                </a>
+                            </li>`;
                         episodes.push(episodeHTML);
                     }
 
@@ -402,137 +397,50 @@ async function generar() {
                 // Construir el HTML final
                 let htmlFinal = `
                 <div class="post-header">
-    <div class="filter">
-        <div class="background-image" style="background-image: url(https://image.tmdb.org/t/p/w500${serieData.backdrop_path});"></div>
-    </div>
-    <div class="image-and-btn">
-        <img src="https://image.tmdb.org/t/p/w300/${serieData.poster_path}" class="poster-img" alt="" />
-        <div class="fav-js">
-            <button class="bs-favs" card-id="${serieData.id}" id="add-btn"><i class="fa-regular fa-heart"></i> Añadir a mi lista</button>
-            <button class="delete-btn none-btn" card-id="${serieData.id}" id="remove-btn"><i class="fa-solid fa-trash"></i> Borrar de mi lista</button>
-        </div>
-    </div>
-    
-    <div class="post-header__info">
-        <h1>${serieData.name}</h1>
-        <ul>
-            <li class="tmdb-rate"><i class="fa-solid fa-star"></i> ${serieData.vote_average.toFixed(1)}</li>
-            <li>${serieData.number_of_seasons + genSeasonsCount}</li>
-            <li>${serieData.first_air_date.slice(0, 4)}</li>
-        </ul>
-        <p class="resume">${serieData.overview}</p>
-        <div class="more-data">
-            <p>Género: ${tags}</p>
-            <p>Created by: ${creators}</p>
-        </div>
-    </div>
-</div>
-
-<!-- Ventana Modal Video -->
-<div id="myModal" class="modal-videos">
-    <div class="modal-content-videos" id="transmitirEpisode">
-        <span id="closeModal" onclick="closeModal">&times;</span>
-        <div id="modalContent" class="iframe-container"></div>
-    </div>
-</div>
-
-<!--more-->
-<div class="season-list">
-    <div class="select-season">
-        <h2>Episodios</h2>
-        <select name="" id="select-season">
-            ${seasonsOption}
-        </select>
-    </div>
-    <div id="temps">
-        ${episodesHTML}
-    </div>
-</div>
-
-<!-- Episodios Modificados -->
-<ul>
-    ${episodesHTML}
-</ul>
-
-<script>
-function toggleSeenStatus(episodeId, checkbox) {
-    const episodeElement = document.querySelector(`[data-episode-id="${episodeId}"]`);
-    const statusText = episodeElement.querySelector(".status-text");
-
-    if (checkbox.checked) {
-        localStorage.setItem(`episode-${episodeId}`, "seen");
-        episodeElement.classList.add("seen");
-        statusText.textContent = "Visto"; // Cambia el texto a "Visto"
-    } else {
-        localStorage.removeItem(`episode-${episodeId}`);
-        episodeElement.classList.remove("seen");
-        statusText.textContent = "No visto"; // Cambia el texto a "No visto"
-    }
-}
-
-// Inicializa el estado de los episodios al cargar la página
-function initializeEpisodeStatus() {
-    const episodes = document.querySelectorAll('li[data-episode-id]');
-    episodes.forEach(episode => {
-        const episodeId = episode.getAttribute('data-episode-id');
-        const checkbox = document.getElementById(`toggle-${episodeId}`);
-        if (localStorage.getItem(`episode-${episodeId}`) === "seen") {
-            checkbox.checked = true;
-            episode.classList.add("seen");
-            episode.querySelector(".status-text").textContent = "Visto"; // Actualiza el texto
-        }
-    });
-}
-
-// Llama a la función al cargar la página
-window.onload = initializeEpisodeStatus;
-</script>
-
-<style>
-.toggle-switch {
-    display: flex;
-    align-items: center;
-}
-
-.toggle-switch input {
-    display: none; /* Oculta el checkbox */
-}
-
-.toggle-switch .slider {
-    width: 34px;
-    height: 20px;
-    background-color: #ccc;
-    border-radius: 34px;
-    position: relative;
-    transition: background-color 0.2s;
-    margin-right: 10px; /* Espacio entre el toggle y el texto */
-}
-
-.toggle-switch .slider:before {
-    content: "";
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: white;
-    top: 2px;
-    left: 2px;
-    transition: transform 0.2s;
-}
-
-.toggle-switch input:checked + .slider {
-    background-color: #2196F3; /* Color cuando está activado */
-}
-
-.toggle-switch input:checked + .slider:before {
-    transform: translateX(14px); /* Mueve el círculo cuando está activado */
-}
-
-.status-text {
-    font-size: 14px; /* Tamaño de la fuente */
-    color: #333; /* Color del texto */
-}
-</style>`;
+                <div class="filter">
+                <div class="background-image" style="background-image: url(https://image.tmdb.org/t/p/w500${serieData.backdrop_path});"></div>
+                        </div>
+                <div class="image-and-btn">
+                <img src="https://image.tmdb.org/t/p/w300/${serieData.poster_path}" class="poster-img" alt="" />
+                <div class="fav-js">
+                <button class="bs-favs" card-id="${serieData.id}" id="add-btn"><i class="fa-regular fa-heart"></i> Añadir a mi lista</button>
+                <button class="delete-btn none-btn" card-id="${serieData.id}" id="remove-btn"><i class="fa-solid fa-trash"></i> Borrar de mi lista</button>
+                </div>
+                </div>
+                
+                <div class="post-header__info">
+                <h1>${serieData.name}</h1>
+                <ul>
+                <li class="tmdb-rate"><i class="fa-solid fa-star"></i> ${serieData.vote_average.toFixed(1)}</li>
+                <li>${serieData.number_of_seasons + genSeasonsCount}</li>
+                <li>${serieData.first_air_date.slice(0, 4)}</li>
+                </ul>
+                <p class="resume">${serieData.overview}</p>
+                <div class="more-data">
+                <p>Género: ${tags}</p>
+                <p>Created by: ${creators}</p>
+                </div>
+                </div>
+                </div>
+                <!-- Ventana Modal Video -->
+                <div id="myModal" class="modal-videos">
+                <div class="modal-content-videos" id="transmitirEpisode">
+                <span id="closeModal" onclick="closeModal">&times;</span>
+                <div id="modalContent" class="iframe-container"></div>
+                </div>
+                </div>
+                <!--more-->
+                <div class="season-list">
+                <div class="select-season">
+                <h2>Episodios</h2>
+                <select name="" id="select-season">
+                ${seasonsOption}
+                </select>
+                </div>
+                <div id="temps">
+                ${episodesHTML}
+                </div>
+                </div>`;
 
                 // Agregar el HTML final al elemento con el ID "html-final"
                 document.getElementById('html-final').innerText = htmlFinal;
