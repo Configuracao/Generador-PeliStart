@@ -455,7 +455,7 @@ async function generar() {
         } else if (isMovie.checked) {
             try {
                 const respuesta = await fetch(
-                    `https://api.themoviedb.org/3/movie/${serieKey}?api_key=c29debe62758f3f450767c272e605067&language=${language}`
+                    `https://api.themoviedb.org/3/movie/${serieKey}?api_key=474da9d11a305cc829f96e5b2295f0d4&language=${language}`
                 );
 
                 if (respuesta.status === 200) {
@@ -467,7 +467,7 @@ async function generar() {
                     const idiomasPredeterminados = ["AR", "ES", "EN", "MX", "UA", "BR", "PR", "CO", "CL", "PE", "VE", "EC", "GT", "CU", "BO", "DO", "HN", "PY", "SV", "NI", "CR", "PA", "UY", "JM", "BS", "BB", "HT", "TT", "KY", "BM", "GY", "SR", "BZ", "AN", "LC", "AG", "DM", "GD", "KN", "VC", "TT", "US", "DE", "FR", "GB"]; // Agrega aquí los idiomas que desees buscar
 
                     const certificationResponse = await fetch(
-                        `https://api.themoviedb.org/3/movie/${serieKey}/release_dates?api_key=c29debe62758f3f450767c272e605067`
+                        `https://api.themoviedb.org/3/movie/${serieKey}/release_dates?api_key=474da9d11a305cc829f96e5b2295f0d4`
                     );
 
                     if (certificationResponse.status === 200) {
