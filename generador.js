@@ -5,7 +5,7 @@ let episodeContainer = document.getElementById("episodeContainer"); // Nuevo ele
 let types = document.querySelectorAll("input[type=radio][name=type]");
 let numeroTemporadaInput = document.getElementById("numeroTemporada");
 let inputsContainer = document.getElementById("inputs-container");
-let api_key = "c29debe62758f3f450767c272e605067";
+let api_key = "474da9d11a305cc829f96e5b2295f0d4";
 let language = "es-MX";
 
 types.forEach((type) => {
@@ -220,7 +220,7 @@ async function generateInputsForAllSeasons(serieId) {
 
         // Obtener el número total de temporadas de la serie
         let seriesResponse = await fetch(
-            `https://api.themoviedb.org/3/tv/${serieId}?api_key=c29debe62758f3f450767c272e605067&language=es-MX`
+            `https://api.themoviedb.org/3/tv/${serieId}?api_key=474da9d11a305cc829f96e5b2295f0d4&language=es-MX`
         );
 
         if (seriesResponse.status === 200) {
@@ -230,7 +230,7 @@ async function generateInputsForAllSeasons(serieId) {
             for (let seasonNumber = 1; seasonNumber <= serieData.number_of_seasons; seasonNumber++) {
                 // Obtener datos de la temporada actual
                 let seasonDataResponse = await fetch(
-                    `https://api.themoviedb.org/3/tv/${serieId}/season/${seasonNumber}?api_key=c29debe62758f3f450767c272e605067&language=es-MX`
+                    `https://api.themoviedb.org/3/tv/${serieId}/season/${seasonNumber}?api_key=474da9d11a305cc829f96e5b2295f0d4&language=es-MX`
                 );
 
                 if (seasonDataResponse.status === 200) {
