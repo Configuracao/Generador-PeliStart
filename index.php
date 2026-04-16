@@ -1,11 +1,3 @@
-<?php
-// Validar que el User-Agent coincida exactamente
-if ($_SERVER['HTTP_USER_AGENT'] !== "CineFlixterApp_Oficial_2026") {
-    header('HTTP/1.0 403 Forbidden');
-    echo "<h1>Acceso no autorizado</h1><p>Usa la aplicación oficial.</p>";
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
